@@ -1,0 +1,12 @@
+Package: GeomMLBStadiums
+Title: GeomMLBStadiums: Draw Major League Baseball Stadiums with ggplot2
+Version: 0.0.0.9000
+Authors@R: person("Ben", "Dilday", email = "ben.dilday.phd@gmail.com.com", role = c("aut", "cre"))
+Description: Draw Major Leagure Stadiums in the ggplot2 framework
+Depends: R (>= 3.5.1)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: ggplot2,
+    grid
+RoxygenNote: 6.0.1
