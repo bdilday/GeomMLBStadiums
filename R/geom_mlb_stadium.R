@@ -143,9 +143,9 @@ geom_mlb_stadium = function(mapping = NULL, data = NULL, stat = "identity",
 
   if (is.null(stadium_ids)) {
     stadium_ids = "generic"
-  } else if (stadium_ids == "all") {
+  } else if ("all" %in% stadium_ids) {
     stadium_ids = unique(data$team)
-  } else if (stadium_ids == "all_mlb") {
+  } else if ("all_mlb" %in% stadium_ids) {
     stadium_ids = unique(data$team)
     cc = which(stadium_ids == "generic")
     if (length(cc) > 0) {
