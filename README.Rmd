@@ -59,7 +59,7 @@ unique(MLBStadiumsPathData$segment)
 
 ### Coordinates
 
-The stadium paths are in the system of the `hc_x` and `hc_y` coordinates of MLBAM. These are inverted (because they're based on a display device where `y=0` is at top, IIRC) which means by default the field gets displayed upside down. This package provides a helper function, `mlbam_xy_transformation`, that transforms these values to a system where y increases from bottom to top and home plate is increase `(0, 0)`.
+The stadium paths are in the system of the `hc_x` and `hc_y` coordinates of MLBAM. These are inverted (because they're based on a display device where `y=0` is at top, IIRC) which means by default the field gets displayed upside down. This package provides a helper function, `mlbam_xy_transformation`, that transforms these values to a system where y increases from bottom to top and home plate is located at `(0, 0)`.
 
 ``` {r}
 set.seed(101)
@@ -76,7 +76,7 @@ summary(mlbam_xy_transformation(batted_ball_data))
 
 ### `geom_mlb_stadium`
 
-This use `geom_mlb_stadium`, which implicitly loads the `MLBStadiumsPathData` data, to plot the 30 current stadiums.
+This uses `geom_mlb_stadium`, which implicitly loads the `MLBStadiumsPathData` data, to plot the 30 current stadiums.
 
 ``` {r}
 ggplot() + 

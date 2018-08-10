@@ -55,7 +55,7 @@ unique(MLBStadiumsPathData$segment)
 
 ### Coordinates
 
-The stadium paths are in the system of the `hc_x` and `hc_y` coordinates of MLBAM. These are inverted (because they're based on a display device where `y=0` is at top, IIRC) which means by default the field gets displayed upside down. This package provides a helper function, `mlbam_xy_transformation`, that transforms these values to a system where y increases from bottom to top and home plate is increase `(0, 0)`.
+The stadium paths are in the system of the `hc_x` and `hc_y` coordinates of MLBAM. These are inverted (because they're based on a display device where `y=0` is at top, IIRC) which means by default the field gets displayed upside down. This package provides a helper function, `mlbam_xy_transformation`, that transforms these values to a system where y increases from bottom to top and home plate is located at `(0, 0)`.
 
 ``` r
 set.seed(101)
@@ -92,7 +92,7 @@ summary(mlbam_xy_transformation(batted_ball_data))
 
 ### `geom_mlb_stadium`
 
-This use `geom_mlb_stadium`, which implicitly loads the `MLBStadiumsPathData` data, to plot the 30 current stadiums.
+This uses `geom_mlb_stadium`, which implicitly loads the `MLBStadiumsPathData` data, to plot the 30 current stadiums.
 
 ``` r
 ggplot() + 
@@ -178,10 +178,6 @@ batted_ball_data %>% mlbam_xy_transformation() %>%
     coord_fixed() + 
     facet_wrap(~team) + 
     theme(legend.position = "bottom")
-#> Warning in if (stadium_ids == "all") {: the condition has length > 1 and
-#> only the first element will be used
-#> Warning in if (stadium_ids == "all_mlb") {: the condition has length > 1
-#> and only the first element will be used
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-14-1.png)
@@ -200,10 +196,6 @@ batted_ball_data %>% mlbam_xy_transformation() %>%
   facet_wrap(~team) + 
   theme(legend.position = "bottom") + 
   stat_density2d(color='gray')
-#> Warning in if (stadium_ids == "all") {: the condition has length > 1 and
-#> only the first element will be used
-#> Warning in if (stadium_ids == "all_mlb") {: the condition has length > 1
-#> and only the first element will be used
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-15-1.png)
