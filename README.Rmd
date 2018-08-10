@@ -51,7 +51,7 @@ The data comprise the 30 current MLB stadiums, in addition to a "generic" stadiu
 unique(MLBStadiumsPathData$team)
 ```
 
-The segments are split up into `outfield_outer`, `outfield_inner`, and `infield`
+The segments are split up into `outfield_outer`, `outfield_inner`, `infield_inner`, and `infield_outer`
 
 ``` {r}
 unique(MLBStadiumsPathData$segment)

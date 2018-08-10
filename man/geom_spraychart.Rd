@@ -53,7 +53,7 @@ the default plot specification, e.g. \code{\link{borders}}.}
 \item{stadium_ids}{character Vector of stadium ids.}
 
 \item{stadium_segments}{character Vector of \code{stadium_segments} to display. Options are
-'outfield_inner', 'outfield_outer', 'infield', 'all'.}
+'outfield_inner', 'outfield_outer', 'infield_inner', 'infield_outer', all'.}
 
 \item{stadium_transform_coords}{boolean if \code{TRUE}, then transform the path data
 according to \code{mlb_xy_transformation}}
