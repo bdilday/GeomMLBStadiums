@@ -143,7 +143,16 @@ geom_mlb_stadium = function(mapping = NULL, data = NULL, stat = "identity",
 
   if (is.null(stadium_ids)) {
     stadium_ids = "generic"
+  } else if (stadium_ids == "all") {
+    stadium_ids = unique(data$team)
+  } else if (stadium_ids == "all_mlb") {
+    stadium_ids = unique(data$team)
+    cc = which(stadium_ids == "generic")
+    if (length(cc) > 0) {
+      stadium_ids = stadium_ids[-cc]
+    }
   }
+
 
   data =
     do.call(rbind.data.frame,
