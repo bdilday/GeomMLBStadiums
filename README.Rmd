@@ -64,7 +64,7 @@ The stadium paths are in the system of the `hc_x` and `hc_y` coordinates of MLBA
 ``` {r}
 set.seed(101)
 batted_ball_data = data.frame(hc_x = rnorm(20, 125, 10), 
-                              hc_y=rnorm(20, 100, 20))
+                              hc_y = rnorm(20, 100, 20))
 
 head(batted_ball_data)
 
@@ -76,7 +76,18 @@ summary(mlbam_xy_transformation(batted_ball_data))
 
 ### `geom_mlb_stadium`
 
-This plots the 30 current stadiums
+This use `geom_mlb_stadium`, which implicitly loads the `MLBStadiumsPathData` data, to plot the 30 current stadiums.
+
+``` {r}
+ggplot() + 
+  geom_mlb_stadium(stadium_ids = "all_mlb", 
+                   stadium_segments = "all") + 
+  facet_wrap(~team) + 
+  coord_fixed() + 
+  theme_void()
+```
+
+An alternative way is to explicitly pass the data to `geom_path`.
 
 ``` {r}
 MLBStadiumsPathData %>% 
@@ -89,13 +100,12 @@ MLBStadiumsPathData %>%
   theme_void()
 ```
 
-This shows the generic stadium
+This shows the generic stadium, which is the default,
 
 ``` {r}
-MLBStadiumsPathData %>% 
-  filter(team == 'generic') %>% 
-  ggplot(aes(x, y)) + 
-  geom_path(aes(group=segment)) + 
+ggplot() + 
+  geom_mlb_stadium(stadium_segments = "all") + 
+  facet_wrap(~team) + 
   coord_fixed() + 
   theme_void()
 ```
@@ -108,7 +118,7 @@ This generates some simulated data.
 # first generate the data
 set.seed(101)
 batted_ball_data = data.frame(hc_x = rnorm(20, 125, 10),
-                              hc_y=rnorm(20, 100, 20))
+                              hc_y = rnorm(20, 100, 20))
 batted_ball_data$team = rep(c("angels", "yankees"), each=10)
 ```
 

@@ -60,7 +60,7 @@ The stadium paths are in the system of the `hc_x` and `hc_y` coordinates of MLBA
 ``` r
 set.seed(101)
 batted_ball_data = data.frame(hc_x = rnorm(20, 125, 10), 
-                              hc_y=rnorm(20, 100, 20))
+                              hc_y = rnorm(20, 100, 20))
 
 head(batted_ball_data)
 #>       hc_x      hc_y
@@ -92,7 +92,20 @@ summary(mlbam_xy_transformation(batted_ball_data))
 
 ### `geom_mlb_stadium`
 
-This plots the 30 current stadiums
+This use `geom_mlb_stadium`, which implicitly loads the `MLBStadiumsPathData` data, to plot the 30 current stadiums.
+
+``` r
+ggplot() + 
+  geom_mlb_stadium(stadium_ids = "all_mlb", 
+                   stadium_segments = "all") + 
+  facet_wrap(~team) + 
+  coord_fixed() + 
+  theme_void()
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
+
+An alternative way is to explicitly pass the data to `geom_path`.
 
 ``` r
 MLBStadiumsPathData %>% 
@@ -105,20 +118,19 @@ MLBStadiumsPathData %>%
   theme_void()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
-This shows the generic stadium
+This shows the generic stadium, which is the default,
 
 ``` r
-MLBStadiumsPathData %>% 
-  filter(team == 'generic') %>% 
-  ggplot(aes(x, y)) + 
-  geom_path(aes(group=segment)) + 
+ggplot() + 
+  geom_mlb_stadium(stadium_segments = "all") + 
+  facet_wrap(~team) + 
   coord_fixed() + 
   theme_void()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
 ### `geom_spraychart`
 
@@ -128,7 +140,7 @@ This generates some simulated data.
 # first generate the data
 set.seed(101)
 batted_ball_data = data.frame(hc_x = rnorm(20, 125, 10),
-                              hc_y=rnorm(20, 100, 20))
+                              hc_y = rnorm(20, 100, 20))
 batted_ball_data$team = rep(c("angels", "yankees"), each=10)
 ```
 
@@ -140,7 +152,7 @@ batted_ball_data %>%
   geom_spraychart() 
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-11-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
 Add some styling using `theme_void` and `coord_fixed`
 
@@ -152,7 +164,7 @@ batted_ball_data %>%
   coord_fixed()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-12-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 This transforms the data and the stadium before plotting, passes the team names in `stadium_ids`, draws all segments, and facets by field.
 
@@ -166,9 +178,13 @@ batted_ball_data %>% mlbam_xy_transformation() %>%
     coord_fixed() + 
     facet_wrap(~team) + 
     theme(legend.position = "bottom")
+#> Warning in if (stadium_ids == "all") {: the condition has length > 1 and
+#> only the first element will be used
+#> Warning in if (stadium_ids == "all_mlb") {: the condition has length > 1
+#> and only the first element will be used
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-14-1.png)
 
 You can make use of any of the other `ggplot2` functions, for example, contours from `stat_density2d`. The `mapping` argument for `geom_spraychart` gets passed to the underlying `geom_point`, as do any extra parameters passed into the `...` argument of `geom_spraychart`, e.g. `size=5` in the below.
 
@@ -184,6 +200,10 @@ batted_ball_data %>% mlbam_xy_transformation() %>%
   facet_wrap(~team) + 
   theme(legend.position = "bottom") + 
   stat_density2d(color='gray')
+#> Warning in if (stadium_ids == "all") {: the condition has length > 1 and
+#> only the first element will be used
+#> Warning in if (stadium_ids == "all_mlb") {: the condition has length > 1
+#> and only the first element will be used
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-14-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-15-1.png)
