@@ -23,34 +23,37 @@ When you load the `GeomMLBStadiums` package it will attach the stadium paths as 
 
 ``` r
 head(MLBStadiumsPathData)
-#>         team        x        y       segment
-#> 9001 generic 125.0000 208.0000 infield_outer
-#> 9002 generic 124.5455 207.4646 infield_outer
-#> 9003 generic 124.0909 206.9293 infield_outer
-#> 9004 generic 123.6364 206.3939 infield_outer
-#> 9005 generic 123.1818 205.8586 infield_outer
-#> 9006 generic 122.7273 205.3232 infield_outer
+#> # A tibble: 6 x 4
+#>   team       x     y segment      
+#>   <chr>  <dbl> <dbl> <chr>        
+#> 1 angels  148.  179. infield_inner
+#> 2 angels  145.  182. infield_inner
+#> 3 angels  142.  184. infield_inner
+#> 4 angels  140.  187. infield_inner
+#> 5 angels  137.  189. infield_inner
+#> 6 angels  135.  192. infield_inner
 ```
 
 The data comprise the 30 current MLB stadiums, in addition to a "generic" stadium. The stadia are identified by team name, with the following conventions
 
 ``` r
 unique(MLBStadiumsPathData$team)
-#>  [1] "generic"      "angels"       "astros"       "athletics"   
+#>  [1] "angels"       "astros"       "athletics"    "blue_jays"   
 #>  [5] "braves"       "brewers"      "cardinals"    "cubs"        
 #>  [9] "diamondbacks" "dodgers"      "giants"       "indians"     
 #> [13] "mariners"     "marlins"      "mets"         "nationals"   
 #> [17] "orioles"      "padres"       "phillies"     "pirates"     
-#> [21] "rangers"      "rays"         "reds"         "rockies"     
-#> [25] "royals"       "tigers"       "twins"        "white_sox"   
-#> [29] "yankees"      "blue_jays"    "red_sox"
+#> [21] "rangers"      "rays"         "red_sox"      "reds"        
+#> [25] "rockies"      "royals"       "tigers"       "twins"       
+#> [29] "white_sox"    "yankees"      "generic"
 ```
 
-The segments are split up into `outfield_outer`, `outfield_inner`, `infield_inner`, and `infield_outer`
+The segments are split up into `outfield_outer`, `outfield_inner`, `infield_inner`, `infield_outer`, `foul_lines`, and `home_plate`
 
 ``` r
 unique(MLBStadiumsPathData$segment)
-#> [1] "infield_outer"  "infield_inner"  "outfield_outer" "outfield_inner"
+#> [1] "infield_inner"  "infield_outer"  "outfield_outer" "outfield_inner"
+#> [5] "foul_lines"     "home_plate"
 ```
 
 ### Coordinates
