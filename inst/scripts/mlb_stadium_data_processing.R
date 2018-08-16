@@ -17,7 +17,7 @@ generic_ballpark = function() {
   outfield_path = rbind.data.frame(left_outfield_line, outfield_curve, right_outfield_line)
   outfield_path$segment = "outfield_outer"
   infield_path = rbind.data.frame(left_infield_line, infield_curve, right_infield_line)
-  infield_path$segment = "infield"
+  infield_path$segment = "infield_outer"
 
   path_df = rbind.data.frame(outfield_path, infield_path)
   team_df = data.frame(team = rep("generic", length(path_df)))

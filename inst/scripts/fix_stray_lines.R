@@ -11,23 +11,35 @@ update_paths_df = function(paths_df) {
 
   outfield_df = paths_df[which(grepl("outfield", paths_df$segment)),]
   infield_df = paths_df[which(grepl("infield", paths_df$segment)),]
+  foul_df = paths_df[which(grepl("foul_lines", paths_df$segment)),]
+  hp_df = paths_df[which(grepl("home_plate", paths_df$segment)),]
 
   # first update the generic field
   cc = which( (infield_df$team == "generic"))
-  tmp = infield_df[cc,]
-  tmp$segment = "infield_outer"
+  if (length(cc) > 0) {
+    tmp = infield_df[cc,]
+    tmp$segment = "infield_outer"
+  }
 
   # now loop over the others
   ll = lapply(unique(infield_df$team), function(s) {
     if (s == "generic") {
       NULL
+    } else if (s == "blue_jays") {
+      a = split_path_df(infield_df, s) %>% select(-s)
+      a[1:(nrow(a)-1),]
     } else {
       a = split_path_df(infield_df, s) %>% select(-s)
     }
   })
 
   others = do.call(rbind.data.frame, ll)
-  rr = rbind.data.frame(tmp, others, outfield_df)
+  if (length(cc) > 0) {
+    rr = rbind.data.frame(tmp, others, outfield_df, foul_df, hp_df)
+  } else {
+    rr = rbind.data.frame(others, outfield_df, foul_df, hp_df)
+  }
+
 }
 
 pair_distance = function(r1, r2) {
