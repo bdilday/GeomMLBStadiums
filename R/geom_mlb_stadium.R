@@ -40,8 +40,11 @@
 #'   the default plot specification, e.g. \code{\link{borders}}.
 #' @param stadium_aes mapping to pass to \code{geom_mlb_stadium}
 #' @param stadium_ids character Vector of stadium ids.
-#' @param stadium_segments character Vector of \code{stadium_segments} to display. Options are
-#' 'outfield_inner', 'outfield_outer', 'infield_inner', 'infield_outer', all'.
+#' @param stadium_segments character Vector of \code{stadium_segments} to display.
+#' Options are
+#' 'outfield_inner', 'outfield_outer',
+#' 'infield_inner', 'infield_outer',
+#' 'foul_lines', 'home_plate', 'all'.
 #' @param stadium_transform_coords boolean if \code{TRUE}, then transform the path data
 #' according to \code{mlb_xy_transformation}
 #' @param ... other arguments passed on to \code{\link{layer}}. These are
