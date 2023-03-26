@@ -1,12 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-GeomMLBStadiums
-===============
 
-This package defines a couple of Geoms to draw MLB stadiums in ggplot2. It also provides a Geom to draw a "spraychart" - `x` and `y` locations of batted balls with a stadium overlay.
+# GeomMLBStadiums
 
-Example use
------------
+This package defines a couple of Geoms to draw MLB stadiums in ggplot2.
+It also provides a Geom to draw a “spraychart” - `x` and `y` locations
+of batted balls with a stadium overlay.
+
+## Example use
 
 ### Install from github and load the necessary libraries
 
@@ -19,46 +20,55 @@ library(dplyr)
 
 ### The stadium data
 
-When you load the `GeomMLBStadiums` package it will attach the stadium paths as a data frame, `MLBStadiumsPathData`
+When you load the `GeomMLBStadiums` package it will attach the stadium
+paths as a data frame, `MLBStadiumsPathData`
 
 ``` r
 head(MLBStadiumsPathData)
-#> # A tibble: 6 x 4
-#>   team       x     y segment      
-#>   <chr>  <dbl> <dbl> <chr>        
-#> 1 angels  148.  179. infield_inner
-#> 2 angels  145.  182. infield_inner
-#> 3 angels  142.  184. infield_inner
-#> 4 angels  140.  187. infield_inner
-#> 5 angels  137.  189. infield_inner
-#> 6 angels  135.  192. infield_inner
+#> # A tibble: 6 × 4
+#>   team       x     y segment   
+#>   <chr>  <dbl> <dbl> <chr>     
+#> 1 angels  125.  205. foul_lines
+#> 2 angels  121.  201. foul_lines
+#> 3 angels  117.  196. foul_lines
+#> 4 angels  113.  192. foul_lines
+#> 5 angels  109.  188. foul_lines
+#> 6 angels  105.  184. foul_lines
 ```
 
-The data comprise the 30 current MLB stadiums, in addition to a "generic" stadium. The stadia are identified by team name, with the following conventions
+The data comprise the 30 current MLB stadiums, in addition to a
+“generic” stadium. The stadia are identified by team name, with the
+following conventions
 
 ``` r
 unique(MLBStadiumsPathData$team)
-#>  [1] "angels"       "astros"       "athletics"    "blue_jays"   
-#>  [5] "braves"       "brewers"      "cardinals"    "cubs"        
-#>  [9] "diamondbacks" "dodgers"      "giants"       "indians"     
-#> [13] "mariners"     "marlins"      "mets"         "nationals"   
-#> [17] "orioles"      "padres"       "phillies"     "pirates"     
-#> [21] "rangers"      "rays"         "red_sox"      "reds"        
-#> [25] "rockies"      "royals"       "tigers"       "twins"       
-#> [29] "white_sox"    "yankees"      "generic"
+#>  [1] "angels"       "astros"       "athletics"    "blue_jays"    "braves"      
+#>  [6] "brewers"      "cardinals"    "cubs"         "diamondbacks" "dodgers"     
+#> [11] "giants"       "guardians"    "mariners"     "marlins"      "mets"        
+#> [16] "nationals"    "orioles"      "padres"       "phillies"     "pirates"     
+#> [21] "rangers"      "rays"         "red_sox"      "reds"         "rockies"     
+#> [26] "royals"       "tigers"       "twins"        "white_sox"    "yankees"     
+#> [31] "generic"
 ```
 
-The segments are split up into `outfield_outer`, `outfield_inner`, `infield_inner`, `infield_outer`, `foul_lines`, and `home_plate`
+The segments are split up into `outfield_outer`, `outfield_inner`,
+`infield_inner`, `infield_outer`, `foul_lines`, and `home_plate`
 
 ``` r
 unique(MLBStadiumsPathData$segment)
-#> [1] "infield_inner"  "infield_outer"  "outfield_outer" "outfield_inner"
-#> [5] "foul_lines"     "home_plate"
+#> [1] "foul_lines"     "home_plate"     "infield_inner"  "infield_outer" 
+#> [5] "outfield_inner" "outfield_outer"
 ```
 
 ### Coordinates
 
-The stadium paths are in the system of the `hc_x` and `hc_y` coordinates of MLBAM. These are inverted (because they're based on a display device where `y=0` is at top, IIRC) which means by default the field gets displayed upside down. This package provides a helper function, `mlbam_xy_transformation`, that transforms these values to a system where y increases from bottom to top and home plate is located at `(0, 0)`.
+The stadium paths are in the system of the `hc_x` and `hc_y` coordinates
+of MLBAM. These are inverted (because they’re based on a display device
+where `y=0` is at top, IIRC) which means by default the field gets
+displayed upside down. This package provides a helper function,
+`mlbam_xy_transformation`, that transforms these values to a system
+where y increases from bottom to top and home plate is located at
+`(0, 0)`.
 
 ``` r
 set.seed(101)
@@ -95,7 +105,8 @@ summary(mlbam_xy_transformation(batted_ball_data))
 
 ### `geom_mlb_stadium`
 
-This uses `geom_mlb_stadium`, which implicitly loads the `MLBStadiumsPathData` data, to plot the 30 current stadiums.
+This uses `geom_mlb_stadium`, which implicitly loads the
+`MLBStadiumsPathData` data, to plot the 30 current stadiums.
 
 ``` r
 ggplot() + 
@@ -106,7 +117,7 @@ ggplot() +
   theme_void()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 An alternative way is to explicitly pass the data to `geom_path`.
 
@@ -121,7 +132,7 @@ MLBStadiumsPathData %>%
   theme_void()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 This shows the generic stadium, which is the default,
 
@@ -133,7 +144,7 @@ ggplot() +
   theme_void()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-10-1.png)
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ### `geom_spraychart`
 
@@ -147,7 +158,8 @@ batted_ball_data = data.frame(hc_x = rnorm(20, 125, 10),
 batted_ball_data$team = rep(c("angels", "yankees"), each=10)
 ```
 
-This plots the data as a spraychart. By default it uses the "generic" stadium.
+This plots the data as a spraychart. By default it uses the “generic”
+stadium.
 
 ``` r
 batted_ball_data %>% 
@@ -155,7 +167,7 @@ batted_ball_data %>%
   geom_spraychart() 
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-12-1.png)
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 Add some styling using `theme_void` and `coord_fixed`
 
@@ -167,9 +179,10 @@ batted_ball_data %>%
   coord_fixed()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
-This transforms the data and the stadium before plotting, passes the team names in `stadium_ids`, draws all segments, and facets by field.
+This transforms the data and the stadium before plotting, passes the
+team names in `stadium_ids`, draws all segments, and facets by field.
 
 ``` r
 batted_ball_data %>% mlbam_xy_transformation() %>%  
@@ -183,9 +196,13 @@ batted_ball_data %>% mlbam_xy_transformation() %>%
     theme(legend.position = "bottom")
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-14-1.png)
+![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
-You can make use of any of the other `ggplot2` functions, for example, contours from `stat_density2d`. The `mapping` argument for `geom_spraychart` gets passed to the underlying `geom_point`, as do any extra parameters passed into the `...` argument of `geom_spraychart`, e.g. `size=5` in the below.
+You can make use of any of the other `ggplot2` functions, for example,
+contours from `stat_density2d`. The `mapping` argument for
+`geom_spraychart` gets passed to the underlying `geom_point`, as do any
+extra parameters passed into the `...` argument of `geom_spraychart`,
+e.g. `size=5` in the below.
 
 ``` r
 batted_ball_data %>% mlbam_xy_transformation() %>%  
@@ -201,4 +218,4 @@ batted_ball_data %>% mlbam_xy_transformation() %>%
   stat_density2d(color='gray')
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-15-1.png)
+![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
